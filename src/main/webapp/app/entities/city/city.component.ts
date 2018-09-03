@@ -1,3 +1,4 @@
+import { LocalDataSource } from 'ng2-smart-table';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs';
@@ -15,6 +16,20 @@ export class CityComponent implements OnInit, OnDestroy {
     cities: ICity[];
     currentAccount: any;
     eventSubscriber: Subscription;
+    data: LocalDataSource;
+    settings = {
+        columns: {
+            id: {
+                title: 'ID'
+            },
+            name: {
+                title: 'Name'
+            },
+            zipcode: {
+                title: 'Zip Code'
+            }
+        }
+    };
 
     constructor(
         private cityService: CityService,
@@ -27,6 +42,7 @@ export class CityComponent implements OnInit, OnDestroy {
         this.cityService.query().subscribe(
             (res: HttpResponse<ICity[]>) => {
                 this.cities = res.body;
+                this.data = new LocalDataSource(res.body);
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );

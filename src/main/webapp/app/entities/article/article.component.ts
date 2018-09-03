@@ -18,23 +18,6 @@ export class ArticleComponent implements OnInit, OnDestroy {
     eventSubscriber: Subscription;
     data: LocalDataSource;
 
-    // settings = {
-    //     columns: {
-    //         id: {
-    //             title: 'ID'
-    //         },
-    //         name: {
-    //             title: ' Name'
-    //         },
-    //         username: {
-    //             title: 'User Name'
-    //         },
-    //         email: {
-    //             title: 'Email'
-    //         }
-    //     }
-    // };
-
     settings = {
         columns: {
             id: {
