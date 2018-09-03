@@ -36,7 +36,8 @@ export class ClientComponent implements OnInit, OnDestroy {
                 title: 'E-mail'
             },
             city: {
-                title: 'City'
+                title: 'City',
+                valuePrepareFunction: city => city.name
             }
         }
     };
