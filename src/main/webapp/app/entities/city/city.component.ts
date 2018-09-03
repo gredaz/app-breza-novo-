@@ -9,6 +9,7 @@ import { Principal } from 'app/core';
 
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { CityService } from './city.service';
+import { LocalDataSource } from 'ng2-smart-table';
 
 @Component({
     selector: 'jhi-city',
@@ -29,6 +30,21 @@ export class CityComponent implements OnInit, OnDestroy {
     predicate: any;
     previousPage: any;
     reverse: any;
+    data: LocalDataSource;
+
+    settings = {
+        columns: {
+            id: {
+                title: 'ID'
+            },
+            name: {
+                title: 'Name'
+            },
+            zipCode: {
+                title: 'Zip Code'
+            }
+        }
+    };
 
     constructor(
         private cityService: CityService,
