@@ -19,9 +19,13 @@ export class ArticleComponent implements OnInit, OnDestroy {
     data: LocalDataSource;
 
     settings = {
+        actions: {
+            edit: false
+        },
         columns: {
             id: {
-                title: 'ID'
+                title: 'ID',
+                editable: false
             },
             name: {
                 title: 'Name'
