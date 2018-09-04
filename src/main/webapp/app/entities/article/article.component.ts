@@ -24,7 +24,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
         actions: {
             edit: false,
             delete: false,
-            custom: [{ name: 'View', title: `View` }, { name: 'Edit', title: `Edit` }, { name: 'Delete', title: 'Delete' }]
+            custom: [{ name: 'View', title: `View ` }, { name: 'Edit', title: `Edit ` }, { name: 'Delete', title: 'Delete ' }]
         },
         add: {
             addButtonContent: 'Add new Article'
@@ -108,7 +108,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
             console.log(event);
         }
         if (event.action === 'Delete') {
-            this.router.navigate(['article/' + event.data.id + '/delete']);
+            this.router.navigate(['/', { outlets: { popup: 'article/' + event.data.id + '/delete' } }]);
             console.log(event);
         }
     }
