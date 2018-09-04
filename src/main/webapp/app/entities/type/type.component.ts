@@ -7,6 +7,7 @@ import { IType } from 'app/shared/model/type.model';
 import { Principal } from 'app/core';
 import { TypeService } from './type.service';
 import { LocalDataSource } from 'ng2-smart-table';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'jhi-type',
@@ -19,6 +20,15 @@ export class TypeComponent implements OnInit, OnDestroy {
     data: LocalDataSource;
 
     settings = {
+        mode: 'external',
+        actions: {
+            edit: false,
+            delete: false,
+            custom: [{ name: 'View', title: `View ` }, { name: 'Edit', title: `Edit ` }, { name: 'Delete', title: 'Delete ' }]
+        },
+        add: {
+            addButtonContent: 'Add new Type'
+        },
         columns: {
             id: {
                 title: 'ID'
@@ -36,7 +46,8 @@ export class TypeComponent implements OnInit, OnDestroy {
         private typeService: TypeService,
         private jhiAlertService: JhiAlertService,
         private eventManager: JhiEventManager,
-        private principal: Principal
+        private principal: Principal,
+        private router: Router
     ) {}
 
     loadAll() {
@@ -71,5 +82,22 @@ export class TypeComponent implements OnInit, OnDestroy {
 
     private onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
+    }
+    addNew() {
+        this.router.navigate(['type/new']);
+    }
+    myView(event) {
+        if (event.action === 'View') {
+            this.router.navigate(['type/' + event.data.id + '/view']);
+            console.log(event);
+        }
+        if (event.action === 'Edit') {
+            this.router.navigate(['type/' + event.data.id + '/edit']);
+            console.log(event);
+        }
+        if (event.action === 'Delete') {
+            this.router.navigate(['/', { outlets: { popup: 'type/' + event.data.id + '/delete' } }]);
+            console.log(event);
+        }
     }
 }
