@@ -7,6 +7,7 @@ import { IArticle } from 'app/shared/model/article.model';
 import { Principal } from 'app/core';
 import { ArticleService } from './article.service';
 import { LocalDataSource } from 'ng2-smart-table';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'jhi-article',
@@ -19,8 +20,14 @@ export class ArticleComponent implements OnInit, OnDestroy {
     data: LocalDataSource;
 
     settings = {
+        mode: 'external',
         actions: {
-            edit: false
+            edit: false,
+            delete: false,
+            custom: [{ name: 'View', title: `View` }, { name: 'Edit', title: `Edit` }, { name: 'Delete', title: 'Delete' }]
+        },
+        add: {
+            addButtonContent: 'Add new Article'
         },
         columns: {
             id: {
@@ -46,33 +53,12 @@ export class ArticleComponent implements OnInit, OnDestroy {
         }
     };
 
-    // data = [
-    //     {
-    //         id: 1,
-    //         name: 'Leanne Graham',
-    //         username: 'Bret',
-    //         email: 'Sincere@april.biz'
-    //     },
-    //     {
-    //         id: 2,
-    //         name: 'Ervin Howell',
-    //         username: 'Antonette',
-    //         email: 'Shanna@melissa.tv'
-    //     },
-
-    //     {
-    //         id: 11,
-    //         name: 'Nicholas DuBuque',
-    //         username: 'Nicholas.Stanton',
-    //         email: 'Rey.Padberg@rosamond.biz'
-    //     }
-    // ];
-
     constructor(
         private articleService: ArticleService,
         private jhiAlertService: JhiAlertService,
         private eventManager: JhiEventManager,
-        private principal: Principal
+        private principal: Principal,
+        private router: Router
     ) {}
 
     loadAll() {
@@ -107,5 +93,23 @@ export class ArticleComponent implements OnInit, OnDestroy {
 
     private onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
+    }
+
+    addNew() {
+        this.router.navigate(['article/new']);
+    }
+    myView(event) {
+        if (event.action === 'View') {
+            this.router.navigate(['article/' + event.data.id + '/view']);
+            console.log(event);
+        }
+        if (event.action === 'Edit') {
+            this.router.navigate(['article/' + event.data.id + '/edit']);
+            console.log(event);
+        }
+        if (event.action === 'Delete') {
+            this.router.navigate(['article/' + event.data.id + '/delete']);
+            console.log(event);
+        }
     }
 }
