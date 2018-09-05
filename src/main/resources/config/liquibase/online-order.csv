@@ -1,0 +1,4 @@
+id;address;phone_number;total_price;client_id;city_id
+1;Njegoseva 1;011/110-110;null;1;1
+2;Kosovska 4;011/220-220;null;2;1
+3;Brankova 2;011/200-200;null;3;2
