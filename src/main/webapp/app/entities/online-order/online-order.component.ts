@@ -42,13 +42,11 @@ export class OnlineOrderComponent implements OnInit, OnDestroy {
             totalPrice: {
                 title: 'Total Price'
             },
-            city: {
-                title: 'City',
-                valuePrepareFunction: city => city.name
+            orderCity: {
+                title: 'City'
             },
-            client: {
-                title: 'Client',
-                valuePrepareFunction: client => client.name
+            orderClient: {
+                title: 'Client'
             }
         }
     };
@@ -65,7 +63,12 @@ export class OnlineOrderComponent implements OnInit, OnDestroy {
         this.onlineOrderService.query().subscribe(
             (res: HttpResponse<IOnlineOrder[]>) => {
                 this.onlineOrders = res.body;
-                this.data = new LocalDataSource(res.body);
+                this.data = new LocalDataSource();
+                for (const name of res.body) {
+                    name.orderCity = name.city.name;
+                    name.orderClient = name.client.name;
+                    this.data.add(name);
+                }
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );

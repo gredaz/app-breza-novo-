@@ -46,9 +46,8 @@ export class ArticleComponent implements OnInit, OnDestroy {
             availableAmount: {
                 title: 'Available Amount'
             },
-            type: {
-                title: 'Type',
-                valuePrepareFunction: type => type.name
+            articleType: {
+                title: 'Type'
             }
         }
     };
@@ -65,7 +64,11 @@ export class ArticleComponent implements OnInit, OnDestroy {
         this.articleService.query().subscribe(
             (res: HttpResponse<IArticle[]>) => {
                 this.articles = res.body;
-                this.data = new LocalDataSource(res.body);
+                this.data = new LocalDataSource();
+                for (const name of res.body) {
+                    name.artycleType = name.type.name;
+                    this.data.add(name);
+                }
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
