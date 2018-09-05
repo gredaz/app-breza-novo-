@@ -82,6 +82,7 @@ export class CityComponent implements OnInit, OnDestroy {
     private onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
     }
+
     addNew() {
         this.router.navigate(['/city/new']);
     }
