@@ -12,9 +12,12 @@
     <include file="config/liquibase/changelog/20180831141719_added_entity_Position.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180831145613_added_entity_Employee.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180904090818_added_entity_Vehicle.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180905084847_added_entity_OnlineOrder.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180905084848_added_entity_OnlineOrderItem.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20180831115315_added_entity_constraints_Client.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180831074545_added_entity_constraints_Article.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180831145613_added_entity_constraints_Employee.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180905084848_added_entity_constraints_OnlineOrderItem.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

@@ -96,7 +96,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
     }
 
     addNew() {
-        this.router.navigate(['article/new']);
+        this.router.navigate(['/article/new']);
     }
     myView(event) {
         if (event.action === 'View') {

@@ -46,8 +46,8 @@ export class ClientComponent implements OnInit, OnDestroy {
                 title: 'E-mail'
             },
             client: {
-                title: 'client',
-                valuePrepareFunction: client => client.name
+                title: 'city',
+                valuePrepareFunction: city => city.name
             }
         }
     };
@@ -94,7 +94,7 @@ export class ClientComponent implements OnInit, OnDestroy {
         this.jhiAlertService.error(errorMessage, null, null);
     }
     addNew() {
-        this.router.navigate(['client/new']);
+        this.router.navigate(['/client/new']);
     }
     myView(event) {
         if (event.action === 'View') {
