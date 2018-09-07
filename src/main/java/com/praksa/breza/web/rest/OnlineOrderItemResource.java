@@ -1,8 +1,10 @@
 package com.praksa.breza.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.praksa.breza.domain.OnlineOrder;
 import com.praksa.breza.domain.OnlineOrderItem;
 import com.praksa.breza.repository.OnlineOrderItemRepository;
+import com.praksa.breza.repository.OnlineOrderRepository;
 import com.praksa.breza.web.rest.errors.BadRequestAlertException;
 import com.praksa.breza.web.rest.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -57,8 +59,9 @@ public class OnlineOrderItemResource {
 
     /**
      * PUT  /online-order-items : Updates an existing onlineOrderItem.
-     *
-     * @param onlineOrderItem the onlineOrderItem to update
+    
+     * @param onlineOrderItem 
+        the onlineOrderItem to update
      * @return the ResponseEntity with status 200 (OK) and with body the updated onlineOrderItem,
      * or with status 400 (Bad Request) if the onlineOrderItem is not valid,
      * or with status 500 (Internal Server Error) if the onlineOrderItem couldn't be updated
@@ -102,6 +105,15 @@ public class OnlineOrderItemResource {
         Optional<OnlineOrderItem> onlineOrderItem = onlineOrderItemRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(onlineOrderItem);
     }
+
+    @GetMapping("/online-order-items/{orderItemId}")
+    @Timed
+    public List<OnlineOrderItem>getOnlineItemByOrder(@PathVariable Long orderItemId) {
+        log.debug("REST request to get OnlineOrderItem : {}", orderItemId);
+        List<OnlineOrderItem> onlineOrderItem = onlineOrderItemRepository.findByOnlineOrder(orderItemId);
+        return onlineOrderItem;
+    }
+    
 
     /**
      * DELETE  /online-order-items/:id : delete the "id" onlineOrderItem.
