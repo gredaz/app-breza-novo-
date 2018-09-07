@@ -75,16 +75,30 @@ export class OnlineOrderItemComponent implements OnInit, OnDestroy {
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
+        this.onlineOrderItemService.findByOnlineOrder(this.onlineOrderId).subscribe(
+            (res: HttpResponse<IOnlineOrderItem[]>) => {
+                this.onlineOrderItems = res.body;
+                this.data = new LocalDataSource();
+                for (const name of res.body) {
+                    name.orderArticle = name.article.name;
+                    name.itemOnlineOrder = name.onlineOrder.id;
+                    if (name.onlineOrder.id === this.onlineOrderId) {
+                        this.data.add(name);
+                    }
+                }
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
     }
 
     ngOnInit() {
-        this.loadAll();
         this.principal.identity().then(account => {
             this.currentAccount = account;
         });
 
         this.sub = this.route.params.subscribe(params => {
             this.id = +params['id'];
+            this.loadAll();
         });
         console.log('id je ovde ' + this.id);
         this.registerChangeInOnlineOrderItems();

@@ -14,6 +14,6 @@ import org.springframework.stereotype.Repository;
 @SuppressWarnings("unused")
 @Repository
 public interface OnlineOrderItemRepository extends JpaRepository<OnlineOrderItem, Long> {
-        List<OnlineOrderItem>findByOnlineOrder(Long orderItemId);
+        List<OnlineOrderItem>findAllByOnlineOrderId(Long orderItemId);
     
 }

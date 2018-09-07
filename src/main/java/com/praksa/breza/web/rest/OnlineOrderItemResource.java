@@ -106,11 +106,11 @@ public class OnlineOrderItemResource {
         return ResponseUtil.wrapOrNotFound(onlineOrderItem);
     }
 
-    @GetMapping("/online-order-items/{orderItemId}")
+    @GetMapping("/online-order-items/online-orders/{orderId}")
     @Timed
-    public List<OnlineOrderItem>getOnlineItemByOrder(@PathVariable Long orderItemId) {
-        log.debug("REST request to get OnlineOrderItem : {}", orderItemId);
-        List<OnlineOrderItem> onlineOrderItem = onlineOrderItemRepository.findByOnlineOrder(orderItemId);
+    public List<OnlineOrderItem>getOnlineItemByOrder(@PathVariable Long orderId) {
+        log.debug("REST request to get OnlineOrderItem : {}", orderId);
+        List<OnlineOrderItem> onlineOrderItem = onlineOrderItemRepository.findAllByOnlineOrderId(orderId);
         return onlineOrderItem;
     }
     
